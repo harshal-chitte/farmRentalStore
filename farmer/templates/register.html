@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div
+          class="banner_content d-md-flex justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <h2>Register</h2>
+            <p>Enter details to create an account</p>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="checkout_area section_gap">
+    <div class="container">
+      {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
+       
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+           
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">we do not share your email with any third party</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                <input type="password" name="checkpassword" id="checkpassword" class="form-control" id="exampleInputPassword1">
+              </div>
+           
+            <button type="submit" class="genric-btn success">Register</button>
+            <div id="emailHelp" class="form-text">
+                have and account already? <span style="display: inline-block;"><a href="{% url 'login_page' %}" class="form-text">Login</a></span>
+              </div>
+              
+            
+          </form>
+    </div>
+  </section>
+
+{% endblock %}

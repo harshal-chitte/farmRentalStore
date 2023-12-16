@@ -1,0 +1,224 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div
+          class="banner_content d-md-flex justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <h2>Product Checkout</h2>
+            <p></p>
+          </div>
+          <div class="page_link">
+            <a href="{% url 'home_page' %}">Home</a>
+            <a href="{% url 'raised_request_list_page' %}">Request Raised</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="checkout_area section_gap">
+    <div class="container">
+ 
+      <div class="billing_details">
+        <form method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-lg-8">
+              <h3>Billing Details</h3>
+              <form
+                class="row contact_form"
+                action="#"
+                method="post"
+                novalidate="novalidate"
+              >
+              
+                <div class="row">
+                  <div class="col-md-6 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="first"
+                      name="name"
+                      required
+                    />
+                    <span
+                      class="placeholder"
+                      data-placeholder="First name"
+                    ></span>
+                  </div>
+                  <div class="col-md-6 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="last"
+                      name="name"
+                      required
+                    />
+                    <span class="placeholder" data-placeholder="Last name"></span>
+                  </div>
+                </div>
+               
+                <div class="row">
+                  <div class="col-md-6 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="number"
+                      name="number"
+                      required
+                    />
+                    <span
+                      class="placeholder"
+                      data-placeholder="Phone number"
+                    ></span>
+                  </div>
+                </div>
+             
+                <div class="row">
+                  <div class="col-md-12 form-group p_star">
+                    <select class="country_select" style="width:100%">
+                      <option value="1">India</option>
+    
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="add1"
+                      name="add1"
+                      required
+                    />
+                    <span
+                      class="placeholder"
+                      data-placeholder="Address line 01"
+                    ></span>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="col-md-12 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="city"
+                      name="city"
+                      required
+                    />
+                    <span class="placeholder" data-placeholder="Town/City"></span>
+                  </div>
+                </div>
+             
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="zip"
+                      name="zip"
+                      placeholder="Postcode/ZIP"
+                      required
+                    />
+                  </div>
+                </div>
+               
+                <div class="col-md-12 mt-3 form-group">
+                  <div class="creat_account">
+                      <h3 style="display: inline-block;">Payment Method <span><img src="{% static 'img/product/single-product/card.jpg' %}" alt=""></span></h3>
+                    </div>
+                    
+                  <div class="col-md-12 form-group">
+                    <input type="text" class="form-control" id="card_no" name="card_no" placeholder="Card Number" required pattern="[0-9]{13,19}" />
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input type="date" class="form-control" id="exp_date" name="exp_date" placeholder="Expiry Date" required />
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input type="password" class="form-control" id="cvv" name="cvv" placeholder="CVV" pattern="\d{3}" required/>
+                    </div>
+                  
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-4">
+              <div class="order_box">
+                <h2>Your Order</h2>
+                <ul class="list">
+                  <li>
+                    <a href="#"
+                      >Product
+                      <span>Total</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      >{{item_detail.p_name}}
+  
+                      <span class="last">₹ {{item_detail.p_price}}/-</span>
+                    </a>
+                  </li>
+                  <li>
+                      <a href="#"
+                        >Days
+                        <span class="last">x {{no_of_days}}</span>
+                      </a>
+                    </li>
+                 
+                </ul>
+                <ul class="list list_2">
+                  <li>
+                    <a href="#"
+                      >Total
+                      <span>₹ {{cost}}/-</span>
+                    </a>
+                  </li>
+                </ul>
+                
+                
+                <div class="creat_account mt-5">
+                  <input type="checkbox" id="f-option4" name="selector" required/>
+                  <label for="f-option4">I’ve read and accept the </label>
+                  <a href="#">terms & conditions*</a>
+                </div>
+  
+                  <input type="hidden" name="id" id="id" value="{{item_detail.id}}">
+                  <button class="main_btn" style="width: 100%;" type="submit">Proceed to Pay</button>
+  
+              </div>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </section>
+  <script>
+    // Get the expiry date input element
+    var expDateInput = document.getElementById('exp_date');
+    
+    // Listen for changes to the input field
+    expDateInput.addEventListener('input', function() {
+        // Get the entered date value
+        var expDateValue = new Date(this.value);
+        
+        // Get today's date
+        var today = new Date();
+        
+        // Check if the expiry date is in the past
+        if (expDateValue < today) {
+            // Display an error message
+            this.setCustomValidity('The expiry date cannot be in the past.');
+        } else {
+            // Clear the error message
+            this.setCustomValidity('');
+        }
+    });
+</script>
+
+{% endblock %}

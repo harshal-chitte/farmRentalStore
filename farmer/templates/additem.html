@@ -1,0 +1,130 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+          <div class="container">
+            <div
+              class="banner_content d-md-flex justify-content-between align-items-center"
+            >
+              <div class="mb-3 mb-md-0">
+                <h2>Product Checkout</h2>
+                <p></p>
+              </div>
+              <div class="page_link">
+                <a href="{% url 'home_page' %}">Home</a>
+                <a href="{% url 'list_page' %}">Listed</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--================End Home Banner Area =================-->
+  
+      <!--================Checkout Area =================-->
+      <section class="checkout_area section_gap">
+        <div class="container">
+
+          <div class="billing_details">
+            <div class="row">
+                <div class="col-2">
+                
+                </div>
+              <div class="col-lg-8">
+                <h3>Add Item</h3>
+                <form
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                {% csrf_token %}
+                {% if type == 'update' %}
+                <input
+                      type="hidden"
+                      class="form-control"
+                      id="id"
+                      name="id"
+                      value="{{data.id}}"
+                      required
+                    />
+                {% endif %}
+                  <div class="col-md-6 form-group p_star">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="first"
+                      name="p_name"
+                      value="{{data.p_name}}"
+                      required
+                    />
+                    <span
+                      class="placeholder"
+                      data-placeholder="Item Name"
+                    ></span>
+                  </div>
+               
+                  <div class="col-md-12 form-group">
+                    
+                    <textarea
+                      class="form-control"
+                      name="p_desc"
+                      id="message"
+                      rows="1"
+                      placeholder="Item Description"
+                      required
+                    >
+                  {{data.p_desc}}
+                  </textarea>
+                  </div>
+
+                  <div class="col-md-6 form-group p_star">
+                    <input class="form-control" value="{{data.p_img}}" name="p_img" type="file" id="formFile">
+                  </div>
+                  <div class="col-md-6 form-group p_star">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="p_price"
+                      name="p_price"
+                      value="{{data.p_price}}"
+                      required
+                    />
+                    <span
+                      class="placeholder"
+                      data-placeholder="Price"
+                    ></span>
+                    
+                  </div>
+                  <div class="col-2">
+                    <span>/day</span>
+                  </div>
+                  <div class="form-select" id="default-select">
+                    <label for="">Category</label>
+                    <select name="category">
+
+                      {% for item in category_lst %}
+                      <option value="{{item.id}}">{{item.category}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-md-12 mt-5">
+                    {% if type == 'update' %}
+                    <button type="submit" name="update_btn" class="genric-btn success">Update Item</button>
+                    <button type="submit" name="delete_btn" class="genric-btn danger">Delete Item</button>
+                    {% else %}
+                    <button type="submit" class="gray_btn">Add Item</button>
+                    {% endif %}
+                  </div>
+                  
+                </form>
+              </div>
+              <div class="col-2">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--================End Checkout Area =================-->
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div
+          class="banner_content d-md-flex justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <h2>Rent Status</h2>
+            <p>Details regarding rent status is dispalyed here</p>
+          </div>
+          <div class="page_link">
+            <a href="{% url 'home_page' %}">Home</a>
+            <a href="{% url 'received_request_list_page' %}">Request Received</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="checkout_area section_gap">
+    <div class="container">
+ 
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Billing Details</h3>
+            <form
+              class="row contact_form"
+              action="#"
+              method="post"
+              novalidate="novalidate"
+            >
+              <div class="col-md-6 form-group p_star">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first"
+                  name="name"
+                  value="{{username}}"
+                  disabled
+                />
+
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last"
+                  name="name"
+                  value="{{first_name}}"
+                  disabled
+                />
+
+              </div>
+              
+              <div class="col-md-6 form-group p_star">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last_name"
+                  name="last_name",
+                  value="{{last_name}}"
+                  disabled
+                />
+
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="compemailany"
+                  value="{{email}}"
+                  disabled
+                />
+     
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <label for="from_date" >From Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="from_date"
+                  name="from_date"
+                  value="{{item_detail.from_date}}"
+                  disabled
+                />
+
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <label for="to_date">To Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="to_date"
+                  name="to_date"
+                  value="{{item_detail.to_date}}"
+                  disabled
+                />
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <label for="to_date">Request Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="to_date"
+                  name="to_date"
+                  value="{{request_status}}"
+                  disabled
+                />
+              </div><div class="col-md-6 form-group p_star" style="display: none;">
+                <label for="to_date">Rent Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="rent_status"
+                  name="rent_status"
+                  value="{{rent_status}}"
+                  disabled
+                />
+              </div>
+              
+              <div class="col-md-12 form-group p_star">
+                <select class="country_select">
+                  <option value="1">India</option>
+
+                </select>
+              </div>
+          
+       
+            </form>
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              <ul class="list">
+                <li>
+                  <a href="#"
+                    >Product
+                    <span>Total</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#"
+                    >{{item_detail.p_name}}
+
+                    <span class="last">₹ {{item_detail.p_price}}/-</span>
+                  </a>
+                </li>
+                <li>
+                    <a href="#"
+                      >Days
+                      <span class="last">x {{no_of_days}}</span>
+                    </a>
+                  </li>
+               
+              </ul>
+              <ul class="list list_2">
+              
+                <li>
+                  <a href="#"
+                    >Total
+                    <span>₹ {{cost}}/-</span>
+                  </a>
+                </li>
+              </ul>
+              
+              
+              
+
+              {% if item_detail.rent_status == 'request_raised' %}
+              <div class="creat_account mt-5">
+                <input type="checkbox" id="f-option4" name="selector" />
+                <label for="f-option4">I’ve read and accept the </label>
+                <a href="#">terms & conditions*</a>
+              </div>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" id="id" value="{{item_detail.id}}">
+                <button style="width: 100% !important;" class="main_btn" type="submit">Accept Request to Rent</button>
+              </form>
+              {% endif %}
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

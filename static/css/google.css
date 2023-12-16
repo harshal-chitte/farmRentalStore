@@ -1,0 +1,18 @@
+#google_translate_element {
+    color: transparent;
+  }
+  #google_translate_element a {
+    display: none;
+  }
+  div.goog-te-gadget {
+    color: transparent !important;
+  }
+  .goog-te-gadget img{
+    display:none !important;
+}
+body > .skiptranslate {
+    display: none;
+}
+body {
+    top: 0px !important;
+}

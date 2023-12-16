@@ -1,0 +1,109 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+<style>
+  .product_top_bar {
+  display: flex;
+  align-items: center;
+}
+</style>
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h2>Shop Category</h2>
+            <p></p>
+          </div>
+          <div class="page_link">
+            <a href="{% url 'home_page' %}">Home</a>
+            <a href="#">Shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+
+  <!--================Category Product Area =================-->
+  <section class="cat_product_area section_gap">
+    <div class="container">
+      <div class="row flex-row-reverse">
+        <div class="col-lg-9">
+          <div class="product_top_bar">
+            <div class="left_dorp" style="flex-grow: 1;">
+              <select class="sorting">
+                {% if filter %}
+                <option value="1">{{filter}}</option>
+                {% else %}
+                <option value="1">None</option>
+                {% endif %}
+              </select>
+            </div>
+            <div class="left_dorp ml-4" style="display: flex; align-items: center;">
+              <a href="{% url 'shop_page' %}">clear</a>
+            </div>
+          </div>
+          
+          
+          
+          <div class="latest_product_inner">
+            <div class="row">
+              {% for item in data %}
+ 
+              {% if item.p_owner != request.session.user.id %}
+              <div class="col-lg-4 col-md-6">
+                <div class="single-product">
+                  <div class="product-img" style="border: 1px solid #dddddd;">
+                    <img
+                      class="card-img"
+                      src="{{item.p_img}}"
+                      alt=""
+                      style="width: 100%; height: 200px;"
+                    />
+                   
+                  </div>
+                  <div class="product-btm">
+                    <a href="{% url 'shop_detail_page' pk=item.id %}" class="d-block">
+                      <h4>{{item.p_name}}</h4>
+                    </a>
+                    <div class="mt-3">
+                      <span class="mr-4">₹ {{item.p_price}}/- per day.</span>
+               
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="left_sidebar_area">
+            <aside class="left_widgets p_filter_widgets">
+              <div class="l_w_title">
+                <h3>Browse Categories</h3>
+              </div>
+              <div class="widgets_inner">
+                <ul class="list">
+                  {% for ele in category_lst %}
+                  <li>
+                    <a href="{% url 'filter_shop_page' filter_id=ele.id %}">{{ele.category}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </aside>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

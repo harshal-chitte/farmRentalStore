@@ -1,0 +1,111 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .display_none{
+    display: none;
+  }
+  .display_block{
+    display: block;
+  }
+</style>
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        
+        <div
+          class="banner_content d-md-flex justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <h2>Request Raised List</h2>
+            <p></p>
+          </div>
+          <div class="page_link">
+            <a href="{% url 'home_page' %}">Home/</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+
+  <!--================Cart Area =================-->
+  <section class="cart_area">
+    <div class="container">
+      <div class="display_none alert alert-danger" id="error_id" role="alert">
+        No details will be available for pending requests
+      </div>
+      <div class="cart_inner">
+        <div class="table-responsive">
+          {% if item_lst %}
+          <table class="table">
+           
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Rental Cost</th>
+                <th scope="col">Status</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for item in item_lst %}
+              
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img
+                        src="{{item.p_img}}"
+                        alt=""
+                        style="width: 200px; height: 200px;"
+                      />
+                    </div>
+                    <div class="media-body">
+                      <p>{{item.p_name}} {% if item.r_status %}<a href="#" style="display: block;">(rented)</a>{% endif %}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>{{item.p_price}}/- per day.</h5>
+                </td>
+                <td>
+                    {% if item.rent_status == 'request_raised' %}
+                    <h5 class="genric-btn primary-border circle">Pending..</h5>
+                    {% elif item.rent_status == 'request_accepted' %}
+                    <h5 class="genric-btn primary-border circle">Accepted</h5>
+                    {% elif item.rent_status == 'rented' %}
+                    <h5 class="genric-btn success-border circle">Rented</h5>
+                    {% elif item.rent_status == 'rejected' %}
+                    <h5 class="genric-btn danger-border circle">Rejected</h5>
+                    {% endif %}
+                </td>
+            
+                <td>
+                  <a class="gray_btn" disabled href="{% url 'received_request_detail_page' prod_id=item.id %}">View</a>
+                </td>
+              </tr>
+              {% endfor %}
+              
+            
+              
+            </tbody>
+          </table>
+          {% else %}
+          <h2 class="text-center">No request for renting</h2>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function setErrorMsg(){
+      const errorElement = document.getElementById("error_id");
+      errorElement.classList.remove("display_none");
+    }
+  </script>
+  <!--================End Cart Area =================-->
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+      {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endif %}
+        {% if raised %}
+        <div class="alert alert-success" role="alert">
+            Request raised successfuly
+        </div>
+        {% endif %}
+      <div class="row s_product_inner">
+        <div class="col-lg-6">
+          <div class="s_product_img">
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+        
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    class="d-block w-100"
+                    src="{{data.p_img}}"
+                    alt="First slide"
+                  />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1">
+          <div class="">
+            <h3>{{data.p_name}}</h3>
+            <h2>₹ {{data.p_price}}/- per day.</h2>
+            <ul class="list">
+              <li>
+                <a class="active" href="#">
+                  <span>Category</span> : {{data.category_name}}</a
+                >
+              </li>
+
+            </ul>
+            <p>
+              {{data.p_desc}}
+            </p>
+            <form method="post">
+            <div class="product_count">
+              <div class="row">
+                <div class="col-6">
+                  <label for="qty">From Date:</label>
+              <input type="date" style="width: 100%;" class="form-control" name="from_date" id="from_date" required>
+                </div>
+                <div class="col-6">
+                  <label for="qty">To Date:</label>
+              <input type="date" style="width: 100%;" class="form-control" name="to_date" id="to_date" required>
+                </div>
+              </div>
+            </div>
+            <div class="card_area">
+              
+              {% csrf_token %}
+                <input type="hidden" name="id" id="id" value="{{data.id}}">
+                <button type="submit" class="main_btn">Raise Request</button>
+ 
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+
+  <!--================Product Description Area =================-->
+  <section class="product_description_area">
+    <div class="container">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item active">
+          <a
+            class="nav-link active"
+            id="home-tab"
+            data-toggle="tab"
+            href="#home"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+            >Description</a
+          >
+        </li>
+
+        
+       
+      </ul>
+      <div class="tab-content active" id="myTabContent">
+        <div
+          class="tab-pane show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <p>
+            {{data.p_desc}}
+          </p>
+    
+        </div>
+     
+      
+    
+      </div>
+    </div>
+  </section>
+  <!--================End Product Description Area =================-->
+{% endblock %}

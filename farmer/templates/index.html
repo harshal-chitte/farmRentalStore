@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" />
+  <title> RENT4FARM </title>
+  
+  
+  <!-- Bootstrap CSS -->
+  
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/lightbox/simpleLightbox.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/nice-select/css/nice-select.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/animate-css/animate.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendors/jquery-ui/jquery-ui.css' %}" />
+  <!-- main css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/google.css' %}" />
+</head>
+
+<body>
+
+
+  <!--================Header Menu Area =================-->
+  <header class="header_area">
+    
+    <div class="main_menu">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <a class="navbar-brand logo_h" href="{% url 'home_page' %}">
+            <img src="{% static 'img/logo.jpeg' %}" alt="" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div id="google_translate_element"></div>
+
+          
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
+            <div class="row w-100 mr-0">
+              <div class="col-lg-7 pr-0">
+                <ul class="nav navbar-nav center_nav pull-right">
+                  <li class="nav-item {% if nav == 'home' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+                  </li>
+                  <li class="nav-item {% if nav == 'shop' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'shop_page' %}">Shop</a>
+                  </li>
+                  <li class="nav-item {% if nav == 'mylist' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'list_page' %}">My List</a>
+                  </li>
+        
+                  <li class="nav-item {% if nav == 'request' %}active{% endif %} submenu dropdown">
+                    <a
+                      href="#"
+                      class="nav-link dropdown-toggle"
+                      data-toggle="dropdown"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      >Request</a
+                    >
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'raised_request_list_page' %}"
+                          >Request Raised</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'received_request_list_page' %}"
+                          >Request Received</a
+                        >
+                      </li>
+                    
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-lg-5 pr-0">
+                <ul class="nav navbar-nav navbar-right right_nav pull-right">
+
+                  <li class="nav-item">
+                    {% if request.session.user %}
+                    <a href="#" class="icons">
+                      <i class="ti-user" aria-hidden="true"></i>
+                      <span>{{request.session.user.username}}</span>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login_page' %}" class="icons">
+                      <i class="ti-user" aria-hidden="true"></i>
+                      <span>Login</span>
+                    </a>
+                    {% endif %}
+                  </li>
+                  <li class="nav-item">
+
+                    {% if request.session.user %}
+                    <a href="{% url 'logout_page' %}" class="icons">
+                      <span>Logout</span>
+                    </a>
+                    {% endif %}
+                  </li>
+                 
+                </ul>
+                <div id="google_translate_element"></div>
+                <script type="text/javascript">
+                  function googleTranslateElementInit() {
+                  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,en,gu,hi,kn,ml,mr,ta,te,ur'}, 'google_translate_element');
+                  }
+                </script>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!--================Header Menu Area =================-->
+
+  {% block content %}
+ 
+  {% endblock %}
+
+  <!--================ start footer Area  =================-->
+  <footer class="footer-area section_gap">
+    <div class="container">
+      
+      <div class="footer-bottom row align-items-center">
+        <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | </a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
+      </div>
+    </div>
+  </footer>
+  <!--================ End footer Area  =================-->
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/stellar.js' %}"></script>
+  <script src="{% static 'vendors/lightbox/simpleLightbox.min.js' %}"></script>
+  <script src="{% static 'vendors/nice-select/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'vendors/isotope/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendors/isotope/isotope-min.js' %}"></script>
+  <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'vendors/counter-up/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'vendors/counter-up/jquery.counterup.js' %}"></script>
+  <script src="{% static 'js/mail-script.js' %}"></script>
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
